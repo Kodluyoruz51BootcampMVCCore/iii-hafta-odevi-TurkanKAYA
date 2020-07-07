@@ -15,17 +15,18 @@ Alt görev istisnası üst göreve yayılabilir.
 İptal belirteçleri kullanılarak görev desteği iptali.
 'Eşzamansız' ve 'bekliyor' anahtar kelimeleri kullanarak eşzamansız uygulama kolaydır.
 
-TASK vs ASYNC AWAİT
+                                                     TASK vs ASYNC AWAİT
+                                                     
 NET'te yeni olan veya eski bir sürümden yeni platforma ve araçlara geçen birçok geliştiriciyle konuşuyorum. Gibi her zaman Görevler vs Threads ve async vs paralel doğasını tanımlamak için yeni yollar düşünmeye çalışıyorum. Modern .NET geliştirme, async / await modelinde bulunur ve async / await, Görev modeline dayanır. Bu nedenle, bu kavramları anlamak, .NET'te uzun vadeli başarı geliştirmenin anahtarıdır.
 DoWorkAsync () yöntemi yalnızca bir döngü çalıştırır. Döngünün her seferinde, bir tür eşzamansız görev yapacak ve daha sonra bir süre meşgul “iş” yapacak, ardından ekranda o “işi” yapmak için harcadığı zamanı temsil eden bir dikdörtgen çizecektir. (Bu, bir web hizmeti çağrısı yapmaya ve ardından hizmetten döndürülen veriler üzerinde bazı yerel işlemler yapmaya benzer.) Bu şekilde (a) işin ne zaman yapıldığını ve (b) işin çakışıp çakışmadığını kolayca görebiliriz diğer görevin çalışmasıyla. Varsa, birden fazla iş parçacığında çalışıyoruz. İlgilendiğimiz iş bizim kodumuzdur (örn. Yerel veri işleme) - beklenen şey değil (async web hizmeti), böylece uygulamadaki her çubuk yerel işlemi temsil edecektir.
 ConfigureAwait (false), zaman uyumsuz tesisatta iş parçacığı bağlamını yok saymasını ve istediği eski iş parçacığında devam etmesini söyler. Bu, kırmızı görev gecikmesiyle tamamlanır tamamlanmaz, UI iş parçacığının kullanılabilir olmasını beklemesi gerekmediği anlamına gelir. Rastgele bir iş parçacığı iş parçacığı üzerinde çalışır.
 Olay işleyicisinin görevlerinin bir iş parçacığında mı, birden fazla iş parçacığında mı çalışacağı konusunda hiçbir fikri yoktur. Tek bildiği, potansiyel olarak eşzamansız 3 görevin tamamlanmasını istemesidir. Temel uygulama ek konuların devreye girip girmeyeceğini belirleyecektir. Birden fazla iş parçacığına sahip olup olmamanız, paralel çalışıp çalışmadığınızı belirler. Bu nedenle, uygulamanızı yazarken ve hata ayıklarken her iki davranışa da hazırlıklı olmanız gerekir, çünkü sonunda, sadece bağlıdır.
 
  
-EXTENSİON NEDİR?
+                                                               EXTENSİON NEDİR?
 Uzantılar, Visual Studio içinde çalışan ve yeni veya geliştirilmiş özellikler sağlayan kod paketleridir. Uzantılar, Visual Studio'ya işlevsellik katan denetimler, örnekler, şablonlar, araçlar veya diğer bileşenler olabilir
 
-Per user and management extensions
+                                                    Per user and management extensions
 
 Uzantıların çoğu kullanıcı başınadır ve %LocalAppData%\Microsoft\VisualStudio\<Visual>Studio sürümü\ \Extensions klasörüne yüklenir. Birkaç uzantı yönetim uzantılarıdır ve Visual * <Studio yükleme klasörüne\>\Common7\IDE\Extensions* klasörüne yüklenir.
 Sisteminizi hatalar veya kötü amaçlı kod içerebilecek uzantılara karşı korumak için, kullanıcı başına uzantıları yalnızca Visual Studio normal kullanıcı izinleriyle çalıştırıldığında yüklenmesini kısıtlayabilirsiniz. Bu, Visual Studio yüksek izinlerle çalıştırıldığında kullanıcı başına uzantıların devre dışı bırakıldığı anlamına gelir.
@@ -36,14 +37,14 @@ Yönetici onay kutusu olarak çalışırken kullanıcı uzantıları başına Y�
 Visual Studio'yu yeniden başlatın.
 
 
-Automatic extension updates:
+                                                  Automatic extension updates:
 
 Uzantılar Visual Studio Marketplace'te yeni bir sürüm bulunduğunda otomatik olarak güncellenir. Uzantının yeni sürümü algılanır ve arka planda yüklenir. Visual Studio'yu bir sonraki açtığınızda, uzantının yeni sürümü çalışır.
 Otomatik güncelleştirmeleri devre dışı kullanabilirsiniz, özelliği tüm uzantılar için veya yalnızca belirli uzantılar için devre dışı kullanabilirsiniz.
 Tüm uzantılar için otomatik güncelleştirmeleri devre dışı kalmak için Extensions > UzantılarıYönet iletişim kutusunda uzantılar için ayarlarınızı değiştir bağlantısını seçin. Seçenekler iletişim kutusunda, uzantıları otomatik olarak güncelleştir'indenetimini kaldırın.
 Belirli bir uzantı için otomatik güncelleştirmeleri devre dışı kalmak için, Uzantıları Yönet iletişim kutusunun sağ tarafındaki uzantının ayrıntılar bölmesinde bu uzantıyı otomatik olarak güncelleştirme seçeneğini kaldırın.
 
-Crash and unresponsive notifications:
+                                                     Crash and unresponsive notifications:
 
 Visual Studio, bir önceki oturumda bir uzatmanın bir kazaya karıştığından şüphelenirse sizi fark edin. Visual Studio çöktüğe göre, özel durum yığınını depolar. Visual Studio bir dahaki sefere, yaprakile başlayan ve tabanına doğru çalışan, yığını inceler. Visual Studio, bir çerçevenin yüklü ve etkin bir uzantının parçası olan bir modüle ait olduğunu belirlerse, bir bildirim gösterir.
 Visual Studio ayrıca, ui'nin yanıt vermemesine neden olan bir uzantıdan şüpheleniyorsa sizi de size haber verir.
@@ -91,5 +92,3 @@ Bildirim yanıt vermeme yle ilgiliyse, tümleşik geliştirme ortamı (IDE), bu 
 
 
 
-2.Extension Nedir? --> Extra paket ekleme. <br/>
-3.SQLite, bunu doğru şekilde (en güncel yol ile) nasıl kullanmalıyız? (Aktif halde kullanıp uygulama)
